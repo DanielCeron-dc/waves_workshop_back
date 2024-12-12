@@ -83,29 +83,32 @@ def init():
 
 def update(frame):
     # Symmetric mode positions
-    a_sym = xA_sym[frame]
-    c_sym = xC_sym
-    b_sym = xB_sym[frame]
+    a_sym = [xA_sym[frame]]  # Convertir a lista
+    c_sym = [xC_sym]         # Convertir a lista
+    b_sym = [xB_sym[frame]]  # Convertir a lista
 
-    lineA_sym.set_data(a_sym, 0)
-    lineC_sym.set_data(c_sym, 0)
-    lineB_sym.set_data(b_sym, 0)
-    springA_sym.set_data([a_sym, c_sym], [0, 0])
-    springB_sym.set_data([c_sym, b_sym], [0, 0])
+    # Actualizar los datos de la animación para el modo simétrico
+    lineA_sym.set_data(a_sym, [0])  # Convertir x e y a listas
+    lineC_sym.set_data(c_sym, [0])
+    lineB_sym.set_data(b_sym, [0])
+    springA_sym.set_data([a_sym[0], c_sym[0]], [0, 0])
+    springB_sym.set_data([c_sym[0], b_sym[0]], [0, 0])
 
     # Antisymmetric mode positions
-    a_anti = xA_anti[frame]
-    c_anti = xC_anti[frame]
-    b_anti = xB_anti[frame]
+    a_anti = [xA_anti[frame]]
+    c_anti = [xC_anti[frame]]
+    b_anti = [xB_anti[frame]]
 
-    lineA_anti.set_data(a_anti, 0)
-    lineC_anti.set_data(c_anti, 0)
-    lineB_anti.set_data(b_anti, 0)
-    springA_anti.set_data([a_anti, c_anti], [0, 0])
-    springB_anti.set_data([c_anti, b_anti], [0, 0])
+    # Actualizar los datos de la animación para el modo antisimétrico
+    lineA_anti.set_data(a_anti, [0])
+    lineC_anti.set_data(c_anti, [0])
+    lineB_anti.set_data(b_anti, [0])
+    springA_anti.set_data([a_anti[0], c_anti[0]], [0, 0])
+    springB_anti.set_data([c_anti[0], b_anti[0]], [0, 0])
 
     return (lineA_sym, lineC_sym, lineB_sym, springA_sym, springB_sym,
             lineA_anti, lineC_anti, lineB_anti, springA_anti, springB_anti)
+
 
 ani = animation.FuncAnimation(fig, update, frames=frames, init_func=init, interval=1000 / fps, blit=True)
 
